@@ -42,7 +42,8 @@ spec:
     protocol: TCP
   selector:
     app: kong
-
+  externalIPs:
+    - 79.143.188.159
 ---
 apiVersion: v1
 kind: Service
@@ -72,10 +73,12 @@ spec:
     spec:
       containers:
       - name: kong
-        image: kong
+        image: kong:0.12
         env:
           - name: KONG_ADMIN_LISTEN
-            value: "0.0.0.0:8001, 0.0.0.0:8444 ssl"
+            value: 0.0.0.0:8001
+          - name: KONG_ADMIN_LISTEN_SSL
+            value: 0.0.0.0:8444
           - name: KONG_PG_PASSWORD
             value: kong
           - name: KONG_PG_HOST

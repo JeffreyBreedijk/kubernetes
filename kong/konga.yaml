@@ -9,7 +9,7 @@ spec:
     targetPort: 1337
     protocol: TCP
   selector:
-    app: kong
+    app: konga
   externalIPs:
     - 79.143.188.159
 ---

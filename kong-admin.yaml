@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kong-admin2
+spec:
+  ports:
+    - port: 8001
+      targetPort: 8001
+      name: http
+      protocol: TCP
+  selector:
+    app: kong-admin
+  externalIPs:
+    - 79.143.188.159
