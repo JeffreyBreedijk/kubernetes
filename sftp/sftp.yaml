@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sftp
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: sftp
+        app: sftp
+    spec:
+      containers:
+      - name: sftp
+        image: jbreedijk/sftp-reader:latest
+        env:
+          - name: spring.rabbitmq.host
+            value: http://rabbit
+          - name: spring.rabbitmq.port
+            value: 5672 
+          - name: spring.rabbitmq.user
+            value: guest
+          - name: spring.rabbitmq.password
+            value: guest
+         ports:
+          - name: default
+            containerPort: 80
