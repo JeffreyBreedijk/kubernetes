@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq
+spec:
+  ports:
+  - name: rabbit 
+    port: 5672
+    targetPort: 5672
+    protocol: TCP
+  selector:
+    app: rabbitmq
+  externalIPs:
+    - 79.143.188.159
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq-management
+spec:
+  ports:
+  - name: rabbit-management
+    port: 15672
+    targetPort: 15672
+    protocol: TCP
+  selector:
+    app: rabbitmq
+  externalIPs:
+    - 79.143.188.159
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: rabbitmq
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: rabbitmq
+        app: rabbitmq
+    spec:
+      containers:
+      - name: rabbitmq
+        image: rabbitmq:3.6.15-management-alpine
+        ports:
+        - name: default
+          containerPort: 5672
+          protocol: TCP
+        - name: management
+          containerPort: 15672
+          protocol: TCP
