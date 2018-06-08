@@ -15,13 +15,16 @@ spec:
         image: jbreedijk/sftp-reader:latest
         env:
           - name: spring.rabbitmq.host
-            value: http://rabbit
+            value: rabbitmq
           - name: spring.rabbitmq.port
-            value: 5672 
+            value: "5672" 
           - name: spring.rabbitmq.user
-            value: guest
+            value: utilize
           - name: spring.rabbitmq.password
-            value: guest
-         ports:
-          - name: default
-            containerPort: 80
+            value: utilize
+          - name: spring.rabbitmq.queue
+            value: sftp-read-jobs
+          - name: spring.rabbitmq.exchange
+            value: jobs
+
+
