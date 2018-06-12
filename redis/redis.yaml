@@ -33,3 +33,9 @@ spec:
         - name: default
           containerPort: 6379
           protocol: TCP
+	    volumeMounts:
+	      - name: xchange
+	        mountPath: "/data"
+  volumes:
+  - name: xchange
+    emptyDir: {}
