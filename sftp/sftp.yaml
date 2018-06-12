@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: sftp
-        image: jbreedijk/sftp-reader:latest
+        image: jbreedijk/sftp-reader:2
         env:
           - name: spring.rabbitmq.host
             value: rabbitmq

@@ -24,6 +24,10 @@ spec:
         name: jenkins
         app: jenkins
     spec:
+      volumes:
+        - name: jenkins-pv-storage
+          persistentVolumeClaim:
+           claimName: jenkins-pv-claim
       containers:
       - name: jenkins
         image: jbreedijk/jenkins-dotnet
@@ -34,4 +38,6 @@ spec:
         - name: other
           containerPort: 5000
           protocol: TCP
-
+        volumeMounts:
+        - mountPath: "/var/jenkins_home"
+          name: jenkins-pv-storage 

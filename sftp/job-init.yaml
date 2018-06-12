@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: job-initalizer
+spec:
+  ports:
+  - name: web
+    port: 8080
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    app: job-initializer
+
+
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: job-initializer
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: job-initializer
+        app: job-initializer
+    spec:
+      containers:
+      - name: job-initializer
+        image: jbreedijk/job-initializer:3
+        ports:
+         - name: web
+           containerPort: 80
+           protocol: TCP
+        env:
+          - name: RabbitConnection__HostName
+            value: rabbitmq
+          - name: RabbitConnection__Port
+            value: "5672" 
+          - name: RabbitConnection__Username
+            value: utilize
+          - name: RabbitConnection__Password
+            value: utilize
+          - name: RabbitProducer__Exchange
+            value: sftp-read-jobs
+          - name: RabbitProducer__RoutingKey
+            value: jobs
+
+
