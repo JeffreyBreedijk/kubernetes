@@ -1,17 +1,17 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: awproduct.to.generic
+  name: awproduct-to-generic
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        name: awproduct.to.generic
-        app: awproduct.to.generic
+        name: awproduct-to-generic
+        app: awproduct-to-generic
     spec:
       containers:
-      - name: awproduct.to.generic
+      - name: awproduct-togeneric
         image: jbreedijk/awproduct.to.generic:2
         env:
           - name: RabbitConnection__Hostname
