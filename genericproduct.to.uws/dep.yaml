@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: genericproduct-to-uws
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: genericproduct-to-uws
+        app: genericproduct-to-uws
+    spec:
+      containers:
+      - name: genericproduct-to-uws
+        image: jbreedijk/genericproduct.to.uws:latest
+        env:
+          - name: RabbitConnection__Hostname
+            value: rabbitmq
+          - name: spring.rabbitmq.port
+            value: "5672" 
+          - name: RabbitConnection__Username
+            value: utilize
+          - name: RabbitConnection__Password
+            value: utilize
+          - name: SharedCache__Host
+            value: redis
+
+
